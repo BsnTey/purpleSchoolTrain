@@ -1,16 +1,16 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { User } from '@prisma/client';
-import { GetUserByEmailQuery } from './get-user-by-email.query';
+import { GetUserByUuidQuery } from './get-user-by-uuid.query';
 import { UserEntity } from '../../entities/user.entity';
 import { UsersRepository } from '../../users.repository';
 
-@QueryHandler(GetUserByEmailQuery)
-export class GetUserByEmailHandler implements IQueryHandler<GetUserByEmailQuery> {
+@QueryHandler(GetUserByUuidQuery)
+export class GetUserByUuidHandler implements IQueryHandler<GetUserByUuidQuery> {
     constructor(private readonly userRepository: UsersRepository) {}
 
-    async execute(query: GetUserByEmailQuery): Promise<User | null> {
-        const { email } = query;
-        const user = await this.userRepository.getUserByEmail(email.toLowerCase());
+    async execute(query: GetUserByUuidQuery): Promise<User | null> {
+        const { uuid } = query;
+        const user = await this.userRepository.getUserById(uuid);
         if (!user) {
             return null;
         }

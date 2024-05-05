@@ -1,15 +1,15 @@
 import { Post } from '@prisma/client';
 
-export class PostEntity implements Post {
+export class GivenPostEntity implements Partial<Post> {
     uuid: string;
     text: string;
     title: string;
-    createdAt: Date;
-    updatedAt: Date;
     userUuid: string;
 
-    constructor(post: Partial<Post>) {
-        Object.assign(this, post);
-        return this;
+    constructor(post: Post) {
+        this.uuid = post.uuid;
+        this.text = post.text;
+        this.title = post.title;
+        this.userUuid = post.userUuid;
     }
 }

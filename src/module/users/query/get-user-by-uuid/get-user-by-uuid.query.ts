@@ -1,3 +1,3 @@
-export class GetUserByEmailQuery {
-    constructor(public readonly email: string) {}
+export class GetUserByUuidQuery {
+    constructor(public readonly uuid: string) {}
 }
